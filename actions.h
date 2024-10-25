@@ -3,5 +3,6 @@
 #include "types.h"
 #endif
 
-int deposit(User user);
-int withdraw(User user);
+User deposit(User user);
+User withdraw(User user);
+void requestBalance(User user);

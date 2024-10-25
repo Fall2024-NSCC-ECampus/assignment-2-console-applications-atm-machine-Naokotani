@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 
 using namespace std;
 
@@ -22,6 +23,10 @@ void printMain() {
   message.append("r -> Request Balance\n");
   message.append("q -> Quit\n");
   printMessage(message);
+}
+
+void printFloat(string message, float balance) {
+  cout << message << balance << endl;
 }
 
 

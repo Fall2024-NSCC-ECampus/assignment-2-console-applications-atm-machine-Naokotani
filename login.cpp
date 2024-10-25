@@ -3,6 +3,7 @@
 #include "types.h"
 #include "io.h"
 #include "users.h"
+#include "exceptions.h"
 #endif
 
 Credentials getCredentials();
@@ -16,7 +17,7 @@ User login()
   {
     return findUser(getCredentials(), getUsers());
   }
-  catch (exception& e)
+  catch (BadCredentials& e)
   {
     throw;
   }
@@ -24,7 +25,6 @@ User login()
 
 User findUser(Credentials credentails, vector<User> users)
 {
-
   for(User user: users)
   {
     if (user.id == credentails.id)
@@ -35,11 +35,11 @@ User findUser(Credentials credentails, vector<User> users)
       }
       else
       {
-        throw("Invalid Password");
+        throw(BadCredentials("Invalid Password.\n"));
       }
     }
   }
-  throw("Id not found");
+  throw(BadCredentials("ID not found.\n"));
 }
 
 

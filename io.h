@@ -11,3 +11,4 @@ float getFloatInput(string prompt = default_prompt);
 void printMessage(string message);
 void printMain();
 void printIntroMenu();
+void printFloat(string message, float num);

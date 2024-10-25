@@ -4,6 +4,7 @@
 #include "io.h"
 #include "accounts.h"
 #include "actions.h"
+#include "exceptions.h"
 #endif
 
 #include <iostream>
@@ -15,7 +16,12 @@ User introMenu() {
   User user;
   while (!user.id)
   {
-    user = getUser(user);
+    try {
+      user = getUser(user);
+    } catch (BadCredentials &e) {
+      cerr << e.what();
+      printIntroMenu();
+    }
   }
   return user;
 }
@@ -23,7 +29,11 @@ User introMenu() {
 User getUser(User user) {
   switch (getCharInput()) {
   case 'l':
-    return login();
+    try {
+      return login();
+    } catch (BadCredentials& e) {
+      throw;
+    }
   case 'c':
     return createAccount();
   case 'q':
@@ -34,35 +44,39 @@ User getUser(User user) {
 }
 
 
-int mainMenu(User user) {
+User mainMenu(User user) {
   printMain();
   switch (getCharInput())
   {
   case 'd':
     try
     {
-      deposit(user);
+      user = deposit(user);
     }
     catch (exception& e)
     {
       cout << e.what();
     }
-    return 1;
+    break;
   case 'w':
     try
     {
-      withdraw(user);
+      user = withdraw(user);
     }
     catch(exception& e)
     {
       cerr << e.what();
     }
-    return 1;
+    break;
+  case 'r':
+    requestBalance(user);
+    break;
   case 'q':
-    return -1;
-  default:
-    return 0;
+    user.id = -1;
   }
+  
+
+  return user;
 }
 
 

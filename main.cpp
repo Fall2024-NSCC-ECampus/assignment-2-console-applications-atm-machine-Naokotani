@@ -3,6 +3,8 @@
 #include "types.h"
 #include "io.h"
 #include "ui.h"
+#include <exception>
+#include <iostream>
 #endif
 
 int start();
@@ -15,7 +17,15 @@ int main()
 }
 
 int start() {
-  while (mainMenu(introMenu()));
+  User user = introMenu();
+  while (user.id > 0)
+  {
+    try {
+      user = mainMenu(user);
+    } catch (exception& e) {
+      cerr << e.what();
+    }
+  }
   return 0;
 }
 

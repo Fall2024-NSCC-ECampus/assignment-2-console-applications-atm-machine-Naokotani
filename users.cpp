@@ -10,28 +10,47 @@
 
 User *initalizeUserPtr(size_t size);
 
-
 vector<User> getUsers()
 {
-  fstream fin("accounts.bin", ios::in | ios::binary);
-
-  size_t size;
-  User *usersPtr = initalizeUserPtr(size);
+  ifstream fin("accounts.bin", ios::in | ios::binary);
+  size_t size = 0;
+  User *usersPtr;
 
   if (fin)
   {
-    fin.read(reinterpret_cast<char*>(&size), 1);
-    fin.read(reinterpret_cast<char*>(usersPtr), size);
+    fin.read(reinterpret_cast<char*>(&size), sizeof(size_t));
+    usersPtr = initalizeUserPtr(size);
+    fin.read(reinterpret_cast<char*>(usersPtr), sizeof(User) * size);
   }
 
   fin.close();
   vector<User> users = vector<User>(usersPtr, usersPtr+size);
   free(usersPtr);
-
   return users;
 }
 
+void saveUsers(vector<User> users)
+{
+  printMessage("Saving Users...");
+  string file = "accounts.bin";
+  size_t size = users.size();
 
+  User *usersArr;
+  usersArr = &users[0];
+
+  ofstream fout(file, ios::out | ios::binary);
+
+  if (fout)
+  {
+    fout.write(reinterpret_cast<char*>(&size), sizeof(size_t));
+    fout.write(reinterpret_cast<char*>(usersArr), sizeof(User) * size);
+  }
+  else {
+    printMessage("error opening file.");
+    free(usersArr);
+    throw("could not open file" + file);
+  }
+}
 
 Credentials getCredentials()
 {

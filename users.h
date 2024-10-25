@@ -5,4 +5,5 @@
 
 std::vector<User> getUsers();
 Credentials getCredentials();
-User *initializeUserArr(size_t size);
+User *initalizeUserPtr(size_t size);
+void saveUsers(vector<User> users);

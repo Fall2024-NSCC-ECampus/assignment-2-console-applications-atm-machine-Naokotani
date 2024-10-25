@@ -3,5 +3,5 @@
 #include "types.h"
 #endif
 
-int mainMenu(User user);
+User mainMenu(User user);
 User introMenu();

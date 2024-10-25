@@ -4,17 +4,25 @@
 #include "io.h"
 #endif
 
-float deposit(User user) {
-  user.balance += getFloatInput();
-  return user.balance;
+User deposit(User user) {
+  user.balance += getFloatInput("Deposit > ");
+  printFloat("New balance: ", user.balance);
+  return user;
 }
 
-float withdraw(User user) {
-  float input = getFloatInput();
+User withdraw(User user) {
+  printFloat("Current balance: ", user.balance);
+  float input = getFloatInput("Withdraw >");
   if (user.balance > input) {
     user.balance -= input;
   } else {
     throw("Insuffcient funds");
   }
-  return user.balance;
+  printFloat("New balance: ", user.balance);
+  return user;
+}
+
+void requestBalance(User user)
+{
+  printFloat("Current Balance: ", user.balance);
 }
