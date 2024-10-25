@@ -1,0 +1,11 @@
+* Program One
+** Create a bank acocunt by supplying id and password
+** Login using id and password
+** On login users can
+*** Withdraw Money
+*** Deposit Money
+*** Request Balance
+*** Quit
+** Quit
+** Failed Login
+taken back to introduction menu
