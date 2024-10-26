@@ -18,6 +18,13 @@ typedef struct UserArr {
 UserArr *initalizeUserPtr(size_t size);
 UserArr *userVecToPtr(vector<User> users, UserArr *userArr);
 
+
+/**
+ * Reads accounts.bin to load vector of Users
+ *
+ * @return Vector of users from file.
+ * @throws file fails to open.
+ */
 vector<User> getUsers()
 {
   ifstream fin("accounts.bin", ios::in | ios::binary);
@@ -33,6 +40,11 @@ vector<User> getUsers()
       fin.read(reinterpret_cast<char*>(usersPtr),
                sizeof(UserArr) * size);
     }
+  }
+  else
+  {
+    cerr << "File failed to open";
+    throw;
   }
 
   fin.close();
@@ -51,7 +63,11 @@ vector<User> getUsers()
   return users;
 }
 
-
+/**
+ * Saves users vector to binary file.
+ *
+ * @throws file fails to open.
+ */
 void saveUsers(vector<User> users)
 {
   string file = "accounts.bin";
@@ -78,6 +94,11 @@ void saveUsers(vector<User> users)
   }
 }
 
+/**
+ * Saves single user accounts.bin file.
+ *
+ * @throws file fails to open.
+ */
 void save(User user)
 {
   fstream fin("accounts.bin", ios::in | ios::out| ios::binary);
@@ -109,6 +130,12 @@ void save(User user)
   fin.close();
 }
 
+/**
+ * Get credentials from user input.
+ *
+ * @return new Credentails
+ * @throws bad credentials
+ */
 Credentials getCredentials()
 {
   try
@@ -121,18 +148,28 @@ Credentials getCredentials()
   }
   catch (exception& e)
   {
-    cout << "wtf?";
-    cout << e.what();
     throw;
   }
 }
 
+
+/**
+ * intailizes a UserArray pointer
+ *
+ * @parameters size of pointer.
+ * @return allocated UserArr pointer.
+ */
 UserArr *initalizeUserPtr(size_t size)
 {
   return (UserArr*) calloc(size, sizeof(UserArr));
 }
 
-
+/**
+ * intailizes a UserArray pointer
+ *
+ * @parameters Vector of uers to be copied, UserArr pointer to copy to.
+ * @return UserArr.
+ */
 UserArr *userVecToPtr(vector<User> users, UserArr *userArr)
 {
   for (size_t i = 0; i < users.size(); i++)

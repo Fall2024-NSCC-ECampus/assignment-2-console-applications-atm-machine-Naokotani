@@ -6,10 +6,14 @@
 #include "../exceptions.h"
 #endif
 
-Credentials getCredentials();
 User findUser(Credentials credentials, vector<User> users);
-vector<User> getUsers();
 
+/**
+ * Prompts for login credentials and finds corresponding User.
+ *
+ * @return Login User.
+ * @throws Invalid credentials, missing password, id not found.
+ */
 User login()
 {
   printMessage("Enter your credentails\n");
@@ -23,6 +27,12 @@ User login()
   }
 };
 
+/**
+ * Loops through User vector to finder user based on credentials 
+ *
+ * @return Login User.
+ * @throws Invalid credentials, missing password, id not found.
+ */
 User findUser(Credentials credentails, vector<User> users)
 {
   for(User user: users)
