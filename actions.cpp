@@ -2,6 +2,7 @@
 #define FILENAME_H
 #include "types.h"
 #include "io.h"
+#include "exceptions.h"
 #endif
 
 User deposit(User user) {
@@ -16,7 +17,7 @@ User withdraw(User user) {
   if (user.balance > input) {
     user.balance -= input;
   } else {
-    throw("Insuffcient funds");
+    throw(InsufficientFunds("Insufficient Funds"));
   }
   printFloat("New balance: ", user.balance);
   return user;

@@ -64,7 +64,7 @@ User mainMenu(User user) {
     {
       user = withdraw(user);
     }
-    catch(exception& e)
+    catch(InsufficientFunds& e)
     {
       cerr << e.what();
     }

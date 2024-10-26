@@ -17,3 +17,18 @@ public:
       return message.c_str();
     }
 };
+
+class InsufficientFunds : public exception {
+private:
+  string message;
+public:
+    InsufficientFunds(const char* msg)
+      : message(msg)
+    {
+    }
+
+    const char* what() const throw()
+    {
+      return message.c_str();
+    }
+};
