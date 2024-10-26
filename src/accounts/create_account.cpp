@@ -4,22 +4,24 @@
 #include "../users.h"
 #include "../io.h"
 #include <cstdlib>
+#include <iostream>
 #endif
 
-User createUser();
-
+/**
+ * Creates and saves a new user to binary file.
+ *
+ * @return New User.
+ */
 User createAccount() {
-  vector<User> users = getUsers();
-  User user = createUser();
+ vector<User> users = getUsers();
+  int newId = users.size() + 1;
+  cout << "New id: " << newId << endl;
+  User user = User {.id = newId, .password = getStringInput("Enter new password>")};
   users.push_back(user);
   saveUsers(users);
   return user;
 }
 
-User createUser() {
-  Credentials credentials = getCredentials();
-  return User {.id = credentials.id, .password = credentials.password};
-}
 
 
 

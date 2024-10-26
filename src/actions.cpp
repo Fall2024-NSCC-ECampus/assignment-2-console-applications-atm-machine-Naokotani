@@ -5,12 +5,23 @@
 #include "exceptions.h"
 #endif
 
+/**
+ * Deposit money in an account.
+ *
+ * @return User with updated balance.
+ */
 User deposit(User user) {
   user.balance += getFloatInput("Deposit > ");
   printFloat("New balance: ", user.balance);
   return user;
 }
 
+/**
+ * Withdraw money from an account.
+ *
+ * @return User with updated balance.
+ * @throws Insufficient funds to widthdraw.
+ */
 User withdraw(User user) {
   printFloat("Current balance: ", user.balance);
   float input = getFloatInput("Withdraw >");
@@ -23,6 +34,9 @@ User withdraw(User user) {
   return user;
 }
 
+/**
+ * prints the current balance.
+ */
 void requestBalance(User user)
 {
   printFloat("Current Balance: ", user.balance);

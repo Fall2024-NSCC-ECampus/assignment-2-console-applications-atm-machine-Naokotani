@@ -12,6 +12,11 @@
 
 User getUser(User user);
 
+/**
+ * Prints the intro menu and gets a User based on input.
+ *
+ * @return User based on inputs.
+ */
 User introMenu() {
   printIntroMenu();
   User user;
@@ -27,6 +32,13 @@ User introMenu() {
   return user;
 }
 
+
+/**
+ * Gets and parses users inputed character
+ *
+ * @return User based on user input.
+ * @throws On bad credential inputs.
+ */
 User getUser(User user) {
   switch (getCharInput()) {
   case 'l':
@@ -44,7 +56,12 @@ User getUser(User user) {
   }
 }
 
-
+/**
+ * Main menu that controls account acctions 
+ *
+ * @return Updated User.
+ * @thorws if Insufficient funds for withdrawl.
+ */
 User mainMenu(User user) {
   printMain();
   switch (getCharInput())

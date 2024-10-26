@@ -16,6 +16,12 @@ int main()
   return 0;
 }
 
+
+/**
+ * Starts the application
+ *
+ * @return integer.
+ */
 int start() {
   User user = introMenu();
   while (user.id > 0)
