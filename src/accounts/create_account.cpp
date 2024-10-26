@@ -1,8 +1,8 @@
 #ifndef FILENAME_H
 #define FILENAME_H
-#include "types.h"
-#include "users.h"
-#include "io.h"
+#include "../types.h"
+#include "../users.h"
+#include "../io.h"
 #include <cstdlib>
 #endif
 

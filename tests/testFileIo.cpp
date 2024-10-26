@@ -1,8 +1,8 @@
 #ifndef FILENAME_H
 #define FILENAME_H
-#include "../types.h"
-#include "../accounts.h"
-#include "../users.h"
+#include "../src/types.h"
+#include "../src/accounts.h"
+#include "../src/users.h"
 #include <iostream>
 #endif
 

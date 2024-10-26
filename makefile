@@ -1,6 +1,9 @@
 CC=g++
 BINARY=atm_machine
-OBJECTS=main.o io/input.o io/print.o menu.o login.o create_account.o actions.o users.o
+SRCDIR=src
+SOURCES= $(shell find $(SRCDIR) -name "*.cpp")
+OBJECTS= $(patsubst %.c, %.o, $(SOURCES))
+
 CFLAGS= -Wall -Wextra -g
 
 all: $(BINARY)
@@ -12,4 +15,4 @@ $(BINARY): $(OBJECTS)
 	$(CC) $(CFLAGS) -c -o $@ $^
 
 clean:
-	rm $(BINARY) $(OBJECTS) accounts.bin
+	rm $(BINARY)

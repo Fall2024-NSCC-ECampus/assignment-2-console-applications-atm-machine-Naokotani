@@ -1,10 +1,9 @@
 #ifndef FILENAME_H
 #define FILENAME_H
-#include "types.h"
-#include "io.h"
-#include "users.h"
-#include "exceptions.h"
-#include <iostream>
+#include "../types.h"
+#include "../io.h"
+#include "../users.h"
+#include "../exceptions.h"
 #endif
 
 Credentials getCredentials();
