@@ -11,8 +11,8 @@
  * @return User with updated balance.
  */
 User deposit(User user) {
-  user.balance += getFloatInput("Deposit > ");
-  printFloat("New balance: ", user.balance);
+  user.balance += getDollarInput("Deposit > ");
+  printBalance(user.balance, "New Balance: $");
   return user;
 }
 
@@ -23,14 +23,16 @@ User deposit(User user) {
  * @throws Insufficient funds to widthdraw.
  */
 User withdraw(User user) {
-  printFloat("Current balance: ", user.balance);
-  float input = getFloatInput("Withdraw >");
+  printBalance(user.balance);
+  int input = getDollarInput("Withdraw >");
+
   if (user.balance > input) {
     user.balance -= input;
   } else {
-    throw(InsufficientFunds("Insufficient Funds"));
+    throw(InsufficientFunds(getBalanceString(user.balance)));
   }
-  printFloat("New balance: ", user.balance);
+
+  printBalance(user.balance, "New Balance: $");
   return user;
 }
 
@@ -39,5 +41,5 @@ User withdraw(User user) {
  */
 void requestBalance(User user)
 {
-  printFloat("Current Balance: ", user.balance);
+  printBalance(user.balance);
 }

@@ -32,7 +32,6 @@ User introMenu() {
   return user;
 }
 
-
 /**
  * Gets and parses users inputed character
  *

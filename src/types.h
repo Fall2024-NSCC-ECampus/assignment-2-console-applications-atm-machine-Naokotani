@@ -6,7 +6,7 @@ using namespace std;
 typedef struct User {
   int id = 0;
   string password = "";
-  float balance = 0.0;
+  int balance = 0;
 }User;
 
 typedef struct Credentials {

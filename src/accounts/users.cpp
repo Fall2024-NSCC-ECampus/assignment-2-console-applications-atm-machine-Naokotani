@@ -12,7 +12,7 @@
 typedef struct UserArr {
   int id;
   char password[20];
-  float balance;
+  int balance;
 }UserArr;
 
 UserArr *initalizeUserPtr(size_t size);
@@ -27,11 +27,12 @@ UserArr *userVecToPtr(vector<User> users, UserArr *userArr);
  */
 vector<User> getUsers()
 {
-  ifstream fin("accounts.bin", ios::in | ios::binary);
+  ifstream fin;
+  fin.open("accounts.bin", ios::in | ios::binary);
   size_t size = 0;
   UserArr *usersPtr;
 
-  if (fin)
+  if (!fin.fail())
   {
     fin.read(reinterpret_cast<char*>(&size), sizeof(size_t));
     if (size > 0)
@@ -43,7 +44,7 @@ vector<User> getUsers()
   }
   else
   {
-    cerr << "File failed to open";
+    cerr << "File failed to open file\n";
     throw;
   }
 
