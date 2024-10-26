@@ -12,4 +12,4 @@ $(BINARY): $(OBJECTS)
 	$(CC) $(CFLAGS) -c -o $@ $^
 
 clean:
-	rm $(BINARY) $(OBJECTS)
+	rm $(BINARY) $(OBJECTS) accounts.bin

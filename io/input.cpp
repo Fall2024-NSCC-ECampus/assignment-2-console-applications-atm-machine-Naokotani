@@ -15,6 +15,18 @@ string getStringInput(string prompt) {
 }
 
 /**
+ * Get a string from user command line input.
+ *
+ * @return string from user input.
+ */
+string getCharArrInput(string prompt, int length) {
+  char s[length];
+  cout << prompt;
+  cin >> s;
+  return s;
+}
+
+/**
  * Get an integer from command line input.
  *
  * @return integer from user input.

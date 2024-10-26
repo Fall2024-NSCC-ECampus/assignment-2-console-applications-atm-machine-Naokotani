@@ -9,10 +9,10 @@
 vector<User> getTestUsers()
 { 
   vector<User> users;
-  users.push_back({.id=1, .password="new", .balance=12.99});
-  users.push_back({.id=2, .password="new", .balance=12.99});
-  users.push_back({.id=3, .password="new", .balance=12.99});
-  users.push_back({.id=4, .password="new", .balance=12.99});
+  users.push_back({.id=1, .password="pass", .balance=12.99});
+  users.push_back({.id=2, .password="password!", .balance=12.99});
+  users.push_back({.id=3, .password="Passtoed!@#", .balance=12.99});
+  users.push_back({.id=4, .password="PPPP22222asdf", .balance=12.99});
   users.push_back({.id=5, .password="new", .balance=12.99});
   users.push_back({.id=6, .password="new", .balance=12.99});
   return users;

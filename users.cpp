@@ -3,68 +3,131 @@
 #include "types.h"
 #include "io.h"
 #include <cstdlib>
+#include <cstring>
 #include <fstream>
 #include <iostream>
+#include <string>
 #endif
 
 
-User *initalizeUserPtr(size_t size);
+typedef struct UserArr {
+  int id;
+  char password[20];
+  float balance;
+}UserArr;
+
+UserArr *initalizeUserPtr(size_t size);
 
 vector<User> getUsers()
 {
   ifstream fin("accounts.bin", ios::in | ios::binary);
   size_t size = 0;
-  User *usersPtr;
+  UserArr *usersPtr;
 
   if (fin)
   {
     fin.read(reinterpret_cast<char*>(&size), sizeof(size_t));
-    usersPtr = initalizeUserPtr(size);
-    fin.read(reinterpret_cast<char*>(usersPtr), sizeof(User) * size);
+    if (size > 0) {
+      usersPtr = initalizeUserPtr(size);
+      fin.read(reinterpret_cast<char*>(usersPtr), sizeof(UserArr) * size);
+    }
   }
 
   fin.close();
-  vector<User> users = vector<User>(usersPtr, usersPtr+size);
-  free(usersPtr);
+  vector<User> users;
+  if (size > 0) {
+    for (size_t i = 0; i < size; i++) {
+      users.push_back(User{
+          usersPtr[i].id, usersPtr[i].password,
+          usersPtr[i].balance
+        });
+    }
+  }
   return users;
 }
 
 void saveUsers(vector<User> users)
 {
-  printMessage("Saving Users...");
+  printMessage("Saving User...");
+
+  for (User user : users) {
+    cout << user.id << endl;
+    cout << user.password << endl;
+    cout << user.balance << endl;
+  }
+
   string file = "accounts.bin";
   size_t size = users.size();
 
-  User *usersArr;
-  usersArr = &users[0];
+  UserArr *userArr;
+  userArr = initalizeUserPtr(users.size());
+
+  for (size_t i = 0; i < users.size(); i++) {
+    userArr[i].id = users[i].id;
+    strcpy(userArr[i].password, users[i].password.c_str());
+    userArr[i].balance = users[i].balance;
+  }
 
   ofstream fout(file, ios::out | ios::binary);
 
   if (fout)
   {
     fout.write(reinterpret_cast<char*>(&size), sizeof(size_t));
-    fout.write(reinterpret_cast<char*>(usersArr), sizeof(User) * size);
+    fout.write(reinterpret_cast<char*>(userArr), sizeof(UserArr) * size);
   }
   else {
     printMessage("error opening file.");
-    free(usersArr);
+    free(userArr);
     throw("could not open file" + file);
   }
+}
+
+void save(User user)
+{
+  fstream fin("accounts.bin", ios::in | ios::out| ios::binary);
+  size_t size = 0;
+  UserArr *usersPtr;
+  usersPtr = initalizeUserPtr(1);
+
+  if (fin)
+  {
+    fin.read(reinterpret_cast<char*>(&size), sizeof(size_t));
+  }
+
+  if (size > 0 && fin) {
+    for (size_t i = 0; i < size; i++)
+    {
+      fin.read(reinterpret_cast<char *>(usersPtr), sizeof(UserArr));
+      if (usersPtr->id == user.id) {
+        usersPtr->balance = user.balance;
+        fin.seekp(-sizeof(UserArr), ios::cur);
+        break;
+      }
+    }
+    cout << usersPtr->balance << endl;
+    fin.write(reinterpret_cast<char*>(usersPtr), sizeof(UserArr));
+  }
+  
+  fin.close();
 }
 
 Credentials getCredentials()
 {
   try
   {
-    return Credentials {.id = getIntInput("ID> "), .password = getStringInput("Password> ")};
+    return Credentials {
+      getIntInput(),
+      getStringInput(),
+    };
   }
-  catch (...) {
+  catch (exception& e) {
+    cout << "wtf?";
+    cout << e.what();
     throw;
   }
 }
 
-
-User *initalizeUserPtr(size_t size)
+UserArr *initalizeUserPtr(size_t size)
 {
-  return (User*) calloc(size, sizeof(User));
+  return (UserArr*) calloc(size, sizeof(UserArr));
 }

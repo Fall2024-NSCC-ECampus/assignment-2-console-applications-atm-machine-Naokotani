@@ -5,6 +5,7 @@
 #include "accounts.h"
 #include "actions.h"
 #include "exceptions.h"
+#include "users.h"
 #endif
 
 #include <iostream>
@@ -72,9 +73,9 @@ User mainMenu(User user) {
     requestBalance(user);
     break;
   case 'q':
+    save(user);
     user.id = -1;
   }
-  
 
   return user;
 }

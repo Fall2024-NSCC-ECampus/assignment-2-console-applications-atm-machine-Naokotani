@@ -4,6 +4,7 @@
 #include "io.h"
 #include "users.h"
 #include "exceptions.h"
+#include <iostream>
 #endif
 
 Credentials getCredentials();
