@@ -1,8 +1,8 @@
 CC=g++
 BINARY=atm_machine
 SRCDIR=src
-SOURCES= $(shell find $(SRCDIR) -name "*.cpp")
-OBJECTS= $(patsubst %.c, %.o, $(SOURCES))
+SOURCES=$(shell find $(SRCDIR) -name "*.cpp")
+OBJECTS=$(SOURCES:$(SRCDIR)/%.cpp=$(SRCDIR)/%.o)
 
 CFLAGS= -Wall -Wextra -g
 
@@ -15,4 +15,4 @@ $(BINARY): $(OBJECTS)
 	$(CC) $(CFLAGS) -c -o $@ $^
 
 clean:
-	rm $(BINARY)
+	rm $(BINARY) $(OBJECTS)

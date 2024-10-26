@@ -1,11 +1,4 @@
-* Program One
-** Create a bank acocunt by supplying id and password
-** Login using id and password
-** On login users can
-*** Withdraw Money
-*** Deposit Money
-*** Request Balance
-*** Quit
-** Quit
-** Failed Login
-taken back to introduction menu
+* Builds 
+run =make= in the root directory
+* Usage
+To use run the executable =atm_machine=. Running the file will create a binary file called =accounts.bin= that will store the account information so it should be persistent after closing the program. Session data will not be saved unless you choose =quit=.
