@@ -1,2 +1,5 @@
 atm_machine
+atm_machine_tests
+accounts.bin
 *.o
+.gdb_history
